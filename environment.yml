@@ -1,0 +1,14 @@
+name: HW6
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pandas
+  - scikit-learn
+  - seaborn
+  - numpy
+  - matplotlib
+  - xgboost
+  - imbalanced-learn
+  - jupyterlab
