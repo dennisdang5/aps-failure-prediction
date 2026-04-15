@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/Users/dennisdang/Documents/Personal python projects/DSCI552/.venv/bin/python" "$0" "$@"
+'''exec' "/Users/dennisdang/Documents/Personal python projects/aps-failure-prediction/.venv/bin/python3" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re

@@ -1,4 +1,4 @@
-name: HW6
+name:
 channels:
   - defaults
   - conda-forge
