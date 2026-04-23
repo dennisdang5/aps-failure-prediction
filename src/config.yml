@@ -1,0 +1,8 @@
+data:
+  train_path: data/aps_failure_training_set.csv
+  test_path: data/aps_failure_test_set.csv
+  skip_rows: 20
+  na_values: na
+  target_column: class
+  positive_label: pos
+  negative_label: neg

@@ -6,3 +6,4 @@ matplotlib
 xgboost
 imbalanced-learn
 jupyterlab
+pyyaml
