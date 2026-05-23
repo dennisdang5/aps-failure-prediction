@@ -6,3 +6,6 @@ data:
   target_column: class
   positive_label: pos
   negative_label: neg
+
+preprocessing:
+  imputation_strategy: median
