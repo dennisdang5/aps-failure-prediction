@@ -20,7 +20,11 @@ xgboost:
   random_state: 42
   n_jobs: 1
   alpha_grid: [0.001, 0.01, 0.1, 1, 10, 100]
+  alpha_grid_smote: [0.001, 0.01, 0.1, 1, 10, 100, 500, 1000]
 
 cross_validation:
   folds: 10
   scoring: roc_auc
+
+smote:
+  random_state: 42
