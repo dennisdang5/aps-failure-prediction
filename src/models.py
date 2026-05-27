@@ -1,6 +1,5 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
-from sklearn.model_selection import cross_val_score
 from xgboost import XGBClassifier
 from imblearn.pipeline import Pipeline as ImbPipeline
 from imblearn.over_sampling import SMOTE
