@@ -28,3 +28,7 @@ cross_validation:
 
 smote:
   random_state: 42
+
+cost:
+  fp_cost: 10
+  fn_cost: 500
