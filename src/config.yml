@@ -35,3 +35,7 @@ smote:
 cost:
   fp_cost: 10
   fn_cost: 500
+
+mlflow:
+  tracking_uri: sqlite:///C:/Users/denni/PycharmProjects/aps-failure-prediction/mlflow.db
+  experiment_name: APS Failure Prediction
