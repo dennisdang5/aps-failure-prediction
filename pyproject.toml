@@ -1,0 +1,18 @@
+[build-system]
+requires = ['setuptools']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'aps-failure-prediction'
+version = '0.1.0'
+description = 'Predictive maintenance for Scania truck APS failures'
+requires-python = '>=3.10'
+dependencies = [
+    'pandas',
+    'scikit-learn',
+    'xgboost',
+    'imbalanced-learn',
+    'matplotlib',
+    'seaborn',
+    'pyyaml',
+]
