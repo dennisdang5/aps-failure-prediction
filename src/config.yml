@@ -10,6 +10,9 @@ data:
 preprocessing:
   imputation_strategy: median
 
+eda:
+  top_features_count: 13
+
 random_forest:
   n_estimators: 100
   random_state: 42
