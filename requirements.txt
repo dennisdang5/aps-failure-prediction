@@ -8,3 +8,6 @@ imbalanced-learn
 jupyterlab
 pyyaml
 dvc
+joblib
+fastapi
+uvicorn
