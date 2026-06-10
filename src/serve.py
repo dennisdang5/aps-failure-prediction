@@ -12,6 +12,7 @@ config = load_config(str(config_path))
 mlflow.set_tracking_uri(config['mlflow']['tracking_uri'])
 
 model = None
+prediction_count = 0
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global model
@@ -32,14 +33,33 @@ def health_check():
 
 @app.post('/predict')
 def predict(request: PredictionRequest):
+    global prediction_count
+    prediction_count += 1
     # Convert dictionary to single row df
     X = pd.DataFrame([request.features])
 
     prediction = model.predict(X)[0]
     probability = model.predict_proba(X)[0, 1]
 
+    # To break even probability x $500 > $10 thus probability > 0.02
+    threshold = config['cost']['decision_threshold']
+    if probability >= threshold:
+        action = 'inspect'
+    else:
+        action = 'no_action'
+
     return {
         'prediction': int(prediction),
         'failure_probability': float(probability),
-        'predicted_class': 'failure' if prediction ==1 else 'no_failure'
+        'predicted_class': 'failure' if prediction == 1 else 'no_failure',
+        'recommended_action': action
+    }
+
+@app.get('/metrics')
+def metrics():
+    return {
+        'model_loaded': model is not None,
+        'model_name': 'aps-failure-predictor',
+        'decision_threshold': config['cost']['decision_threshold'],
+        'prediction_count': prediction_count
     }

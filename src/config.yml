@@ -35,6 +35,7 @@ smote:
 cost:
   fp_cost: 10
   fn_cost: 500
+  decision_threshold: 0.02
 
 mlflow:
   tracking_uri: sqlite:///C:/Users/denni/PycharmProjects/aps-failure-prediction/mlflow.db
