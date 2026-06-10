@@ -1,0 +1,33 @@
+stages:
+  preprocess:
+    cmd: python src/run_preprocessing.py
+    deps:
+      - src/run_preprocessing.py
+      - data/aps_failure_training_set.csv
+      - data/aps_failure_test_set.csv
+    outs:
+      - data/processed/X_train.parquet
+      - data/processed/y_train.parquet
+      - data/processed/X_test.parquet
+      - data/processed/y_test.parquet
+
+  train:
+    cmd: python src/run_train.py
+    deps:
+      - src/run_train.py
+      - data/processed/X_train.parquet
+      - data/processed/y_train.parquet
+    outs:
+      - models/rf_imbalanced.joblib
+      - models/rf_balanced.joblib
+      - models/xgb.joblib
+      - models/xgb_SMOTE.joblib
+
+  evaluate:
+    cmd: python src/run_evaluate.py
+    deps:
+      - src/run_evaluate.py
+      - data/processed/X_test.parquet
+      - data/processed/y_test.parquet
+    outs:
+      - results/model_comparison.csv

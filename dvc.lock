@@ -1,0 +1,86 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/run_preprocessing.py
+    deps:
+    - path: data/aps_failure_test_set.csv
+      hash: md5
+      md5: 9fbc9967e547a9ef5faab5c3cdf714e8
+      size: 11943558
+    - path: data/aps_failure_training_set.csv
+      hash: md5
+      md5: df9a09ae5b0c9555d7821a73fef8801d
+      size: 44669194
+    - path: src/run_preprocessing.py
+      hash: md5
+      md5: eabf99dcc8bb040bff88ed90776fd35c
+      size: 1363
+    outs:
+    - path: data/processed/X_test.parquet
+      hash: md5
+      md5: 9fb534804956caa11bd760fe95e7008b
+      size: 8669792
+    - path: data/processed/X_train.parquet
+      hash: md5
+      md5: 9adab13a9593f383688887cd33191d5e
+      size: 28675070
+    - path: data/processed/y_test.parquet
+      hash: md5
+      md5: 0061872fe2f0d20e1c417080e36d057a
+      size: 2555
+    - path: data/processed/y_train.parquet
+      hash: md5
+      md5: 9e5b9e377c39d80e3520633716fec8b7
+      size: 4019
+  train:
+    cmd: python src/run_train.py
+    deps:
+    - path: data/processed/X_train.parquet
+      hash: md5
+      md5: 9adab13a9593f383688887cd33191d5e
+      size: 28675070
+    - path: data/processed/y_train.parquet
+      hash: md5
+      md5: 9e5b9e377c39d80e3520633716fec8b7
+      size: 4019
+    - path: src/run_train.py
+      hash: md5
+      md5: 121c7bb31636177ba436a99ba035fd6a
+      size: 1152
+    outs:
+    - path: models/rf_balanced.joblib
+      hash: md5
+      md5: ac7e3c2988d1a8bc1457029135975ad1
+      size: 9013558
+    - path: models/rf_imbalanced.joblib
+      hash: md5
+      md5: 2baae9b3aa84408a855fa9912258b060
+      size: 6426998
+    - path: models/xgb.joblib
+      hash: md5
+      md5: 2238c18a47404b725f72d2f8b217826d
+      size: 16382
+    - path: models/xgb_SMOTE.joblib
+      hash: md5
+      md5: e1c22e391c74873483bf9a04209c3e15
+      size: 1376719
+  evaluate:
+    cmd: python src/run_evaluate.py
+    deps:
+    - path: data/processed/X_test.parquet
+      hash: md5
+      md5: 9fb534804956caa11bd760fe95e7008b
+      size: 8669792
+    - path: data/processed/y_test.parquet
+      hash: md5
+      md5: 0061872fe2f0d20e1c417080e36d057a
+      size: 2555
+    - path: src/run_evaluate.py
+      hash: md5
+      md5: 7beca8056154189200a276a24664aad5
+      size: 1285
+    outs:
+    - path: results/model_comparison.csv
+      hash: md5
+      md5: 0854103ababbe0bfe5bf5d495aff8972
+      size: 292
