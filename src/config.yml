@@ -38,5 +38,8 @@ cost:
   decision_threshold: 0.02
 
 mlflow:
-  tracking_uri: sqlite:///C:/Users/denni/PycharmProjects/aps-failure-prediction/mlflow.db
+  tracking_uri: sqlite:///mlflow.db
   experiment_name: APS Failure Prediction
+
+serve:
+  model_path: models/xgb_SMOTE.joblib

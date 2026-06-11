@@ -11,3 +11,6 @@ dvc
 joblib
 fastapi
 uvicorn
+streamlit
+requests
+pytest

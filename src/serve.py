@@ -1,22 +1,22 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-import mlflow
 from pathlib import Path
 from data_loader import load_config
 from pydantic import BaseModel
 import pandas as pd
+import joblib
 
 # Config and model loading
 config_path = Path(__file__).parent / 'config.yml'
 config = load_config(str(config_path))
-mlflow.set_tracking_uri(config['mlflow']['tracking_uri'])
 
 model = None
 prediction_count = 0
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global model
-    model = mlflow.sklearn.load_model('models:/aps-failure-predictor/latest')
+    model_path = Path(__file__).parent.parent / config['serve']['model_path']
+    model = joblib.load(model_path)
     yield
 
 # Pydantic model that validates incoming data

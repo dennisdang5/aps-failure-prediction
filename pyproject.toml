@@ -16,3 +16,6 @@ dependencies = [
     'seaborn',
     'pyyaml',
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ['src']
