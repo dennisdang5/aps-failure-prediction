@@ -1,8 +1,8 @@
 import joblib
 import pandas as pd
 from sklearn.metrics import roc_auc_score, confusion_matrix
-from data_loader import load_config, load_test_data
-from evaluate import compute_cost, compute_cv_error, compute_misclassification_rate, plot_roc_curve
+from data_loader import load_config
+from evaluate import compute_cost, compute_misclassification_rate
 
 # Load config
 config = load_config()

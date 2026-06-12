@@ -4,3 +4,7 @@ eda
 evaluate
 models
 preprocessing
+run_evaluate
+run_preprocessing
+run_train
+serve
