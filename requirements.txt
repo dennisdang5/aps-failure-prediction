@@ -15,3 +15,5 @@ streamlit
 requests
 pytest
 ruff
+evidently
+httpx

@@ -15,7 +15,8 @@ dependencies = [
     'matplotlib',
     'seaborn',
     'pyyaml',
-    'evidently'
+    'evidently',
+    'httpx'
 ]
 
 [tool.pytest.ini_options]
