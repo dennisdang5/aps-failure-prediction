@@ -6,6 +6,7 @@ from data_loader import load_config
 from pydantic import BaseModel
 import pandas as pd
 import joblib
+import json
 
 # Config and model loading
 config_path = Path(__file__).parent / 'config.yml'
@@ -22,8 +23,9 @@ async def lifespan(app: FastAPI):
     model = joblib.load(model_path)
 
     # Load expected features names from the training data
-    X_train = pd.read_parquet(Path(__file__).parent.parent / "data/processed/X_train.parquet")
-    expected_features = list(X_train.columns)
+    features_path = Path(__file__).parent / 'features_names.json'
+    with open(features_path) as f:
+        expected_features = json.load(f)
     yield
 
 # Pydantic model that validates incoming data
