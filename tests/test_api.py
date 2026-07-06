@@ -1,6 +1,7 @@
 import pandas as pd
 from fastapi.testclient import TestClient
 from serve import app
+import json
 
 client = TestClient(app)
 
@@ -12,8 +13,9 @@ def test_health_check():
 
 def test_predict():
     with TestClient(app) as client:
-        X_test = pd.read_parquet('data/processed/X_test.parquet')
-        features = X_test.iloc[0].to_dict()
+        with open('src/features_names.json') as f:
+            features_names = json.load(f)
+        features = {name: 0.0 for name in features_names}
 
         response = client.post('/predict', json={'features': features})
 
