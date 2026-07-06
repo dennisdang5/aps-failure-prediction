@@ -1,4 +1,3 @@
-import pandas as pd
 from fastapi.testclient import TestClient
 from serve import app
 import json
