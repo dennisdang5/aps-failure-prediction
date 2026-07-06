@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
+from fastapi import HTTPException
 from pathlib import Path
 from data_loader import load_config
 from pydantic import BaseModel
@@ -11,12 +12,18 @@ config_path = Path(__file__).parent / 'config.yml'
 config = load_config(str(config_path))
 
 model = None
+expected_features = None
 prediction_count = 0
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    global model
+    global model, expected_features
     model_path = Path(__file__).parent.parent / config['serve']['model_path']
     model = joblib.load(model_path)
+
+    # Load expected features names from the training data
+    X_train = pd.read_parquet(Path(__file__).parent.parent / "data/processed/X_train.parquet")
+    expected_features = list(X_train.columns)
     yield
 
 # Pydantic model that validates incoming data
@@ -34,6 +41,15 @@ def health_check():
 @app.post('/predict')
 def predict(request: PredictionRequest):
     global prediction_count
+
+    # Validate that all expected features are present from the user
+    missing = set(expected_features) - set(request.features.keys())
+    if missing:
+        raise HTTPException(
+            status_code=422,
+            detail=f'Missing {len(missing)} required features'
+        )
+
     prediction_count += 1
     # Convert dictionary to single row df
     X = pd.DataFrame([request.features])
