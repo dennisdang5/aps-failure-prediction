@@ -8,3 +8,4 @@ models/
 mlflow.db
 *.png
 .DS_Store
+.idea/
