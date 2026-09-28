@@ -13,7 +13,7 @@ An end-to-end MLOps pipeline for predicting Air Pressure System failures in Scan
 | XGBoost Linear | 0.91 | 134 | 64 | $33,340 |
 | XGBoost + SMOTE | 0.99 | 322 | 30 | $18,220 |
 
-**Best model:** XGBoost with SMOTE achieved the lowest cost ($18,220) by catching 96% of failures, despite having a higher raw misclassification rate. This demonstrates why domain-specific cost metrics matter more than accuracy for imbalanced problems.
+**Best model:** XGBoost with SMOTE achieved the lowest cost ($18,220) by catching 96% of failures, despite having a higher raw misclassification rate.
 
 ## Problem
 
