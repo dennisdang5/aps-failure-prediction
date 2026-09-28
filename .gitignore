@@ -11,3 +11,4 @@ mlflow.db
 .idea/
 results/drift_report.html
 results/drift_summary.json
+notebooks/get_prediction_test.ipynb
