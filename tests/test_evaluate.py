@@ -1,5 +1,6 @@
 from evaluate import compute_cost, compute_misclassification_rate
 
+
 def test_compute_cost():
     # Test inputs
     y_true = [0, 0, 1, 1, 1]

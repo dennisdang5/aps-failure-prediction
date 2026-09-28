@@ -1,6 +1,6 @@
 """Preprocessing pipeline stage: load raw data, encode, split, impute, save"""
-from data_loader import load_config, load_train_data, load_test_data
-from preprocessing import encode_labels, split_features_target, impute_missing_values
+from data_loader import load_config, load_test_data, load_train_data
+from preprocessing import encode_labels, impute_missing_values, split_features_target
 
 # Load config
 config = load_config()

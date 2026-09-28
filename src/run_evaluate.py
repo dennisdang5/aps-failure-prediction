@@ -1,6 +1,7 @@
 import joblib
 import pandas as pd
-from sklearn.metrics import roc_auc_score, confusion_matrix
+from sklearn.metrics import confusion_matrix, roc_auc_score
+
 from data_loader import load_config
 from evaluate import compute_cost, compute_misclassification_rate
 

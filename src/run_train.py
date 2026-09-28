@@ -1,7 +1,12 @@
 import joblib
 import pandas as pd
+
 from data_loader import load_config
-from models import train_random_forest_classifier, train_xgb_classifier, train_SMOTE_xgb_classifier
+from models import (
+    train_random_forest_classifier,
+    train_SMOTE_xgb_classifier,
+    train_xgb_classifier,
+)
 
 # Load config
 config = load_config()

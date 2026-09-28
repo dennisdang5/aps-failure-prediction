@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.impute import SimpleImputer
 
+
 # Changes class labels to binary
 def encode_labels(aps_data, target_column, positive_label, negative_label):
     aps_data[target_column] = aps_data[target_column].map({positive_label:1, negative_label:0})

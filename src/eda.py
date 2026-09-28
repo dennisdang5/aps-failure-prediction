@@ -1,6 +1,8 @@
+import math
+
 import matplotlib.pyplot as plt
 import seaborn as sns
-import math
+
 
 def compute_coefficient_of_variation(aps_df):
     coefficient_of_variation_CV = aps_df.std() / aps_df.mean()
@@ -19,7 +21,7 @@ def get_top_cv_features(cv_series, n):
 
 def plot_scatterplot(features_df, target_y, features_name, ncols=4, figsize=(15,10)):
     nrows = math.ceil(len(features_name) / ncols)
-    fig, ax = plt.subplots(nrows=nrows, ncols=ncols, figsize=figsize)
+    _ , ax = plt.subplots(nrows=nrows, ncols=ncols, figsize=figsize)
     ax = ax.flatten()
     for i, feature_name in enumerate(features_name):
         ax[i].scatter(target_y, features_df[feature_name])
@@ -36,7 +38,7 @@ def plot_scatterplot(features_df, target_y, features_name, ncols=4, figsize=(15,
 
 def plot_boxplot(features_df, target_y, features_name, ncols=4, figsize=(15,10)):
     nrows = math.ceil(len(features_name) / ncols)
-    fig, ax = plt.subplots(nrows=nrows, ncols=ncols, figsize=figsize)
+    _ , ax = plt.subplots(nrows=nrows, ncols=ncols, figsize=figsize)
     ax = ax.flatten()
     for i, feature_name in enumerate(features_name):
         sns.boxplot(x=target_y, y=features_df[feature_name], ax=ax[i])

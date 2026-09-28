@@ -1,6 +1,6 @@
-from sklearn.metrics import accuracy_score, confusion_matrix, RocCurveDisplay
-from sklearn.model_selection import GridSearchCV, cross_val_score
 import matplotlib.pyplot as plt
+from sklearn.metrics import RocCurveDisplay, accuracy_score, confusion_matrix
+from sklearn.model_selection import GridSearchCV, cross_val_score
 
 
 def compute_misclassification_rate(y_true, y_pred):
@@ -8,7 +8,7 @@ def compute_misclassification_rate(y_true, y_pred):
 
 def compute_cost(y_true, y_pred, cost_config):
     cm = confusion_matrix(y_true, y_pred)
-    tp, fp, fn, tn = cm.ravel()
+    _tp, fp, fn, _tn = cm.ravel()
     total_cost = (cost_config['fp_cost'] * fp + cost_config['fn_cost'] * fn)
     return total_cost
 

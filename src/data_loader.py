@@ -1,6 +1,8 @@
-import pandas as pd
 from pathlib import Path
+
+import pandas as pd
 import yaml
+
 
 def load_config(yaml_file_path='src/config.yml'):
     project_root = Path(__file__).parent.parent

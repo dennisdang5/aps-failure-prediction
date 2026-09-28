@@ -1,12 +1,13 @@
-from contextlib import asynccontextmanager
-from fastapi import FastAPI
-from fastapi import HTTPException
-from pathlib import Path
-from data_loader import load_config
-from pydantic import BaseModel
-import pandas as pd
-import joblib
 import json
+from contextlib import asynccontextmanager
+from pathlib import Path
+
+import joblib
+import pandas as pd
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+
+from data_loader import load_config
 
 # Config and model loading
 config_path = Path(__file__).parent / 'config.yml'
@@ -16,21 +17,24 @@ model = None
 expected_features = None
 prediction_count = 0
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    global model, expected_features
-    model_path = Path(__file__).parent.parent / config['serve']['model_path']
-    model = joblib.load(model_path)
-
-    # Load expected features names from the training data
-    features_path = Path(__file__).parent / 'features_names.json'
-    with open(features_path) as f:
-        expected_features = json.load(f)
-    yield
-
 # Pydantic model that validates incoming data
 class PredictionRequest(BaseModel):
     features: dict[str, float]
+
+def load_artifacts():
+    model_path = Path(__file__).parent.parent / config['serve']['model_path']
+    loaded_model = joblib.load(model_path)
+
+    features_path = Path(__file__).parent / 'features_names.json'
+    with open(features_path) as f:
+        features = json.load(f)
+    return loaded_model, features
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    global model, expected_features
+    model, expected_features = load_artifacts()
+    yield
 
 # App creation
 app = FastAPI(title='APS Failure Prediction API', lifespan=lifespan)

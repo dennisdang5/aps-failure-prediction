@@ -1,6 +1,8 @@
-import pandas as pd
 import numpy as np
-from preprocessing import encode_labels, split_features_target, impute_missing_values
+import pandas as pd
+
+from preprocessing import encode_labels, impute_missing_values, split_features_target
+
 
 def test_encode_labels():
     df = pd.DataFrame({'class': ['pos', 'neg', 'pos', 'neg']})
