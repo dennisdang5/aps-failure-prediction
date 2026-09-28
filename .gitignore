@@ -9,3 +9,5 @@ mlflow.db
 *.png
 .DS_Store
 .idea/
+results/drift_report.html
+results/drift_summary.json
